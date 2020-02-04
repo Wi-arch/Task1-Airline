@@ -6,6 +6,21 @@ public class CargoPlane extends AbstractPlane {
 
 	private double carryingCapacity;
 
+	public CargoPlane() {
+
+	}
+
+	public double getCarryingCapacity() {
+		return carryingCapacity;
+	}
+
+	public void setCarryingCapacity(double carryingCapacity) throws InvalidPlaneValueException {
+		if (carryingCapacity <= 0) {
+			throw new InvalidPlaneValueException("Invalid carrying capacity");
+		}
+		this.carryingCapacity = carryingCapacity;
+	}
+
 	@Override
 	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
 		if (fuelConsumption < 0) {
@@ -20,17 +35,6 @@ public class CargoPlane extends AbstractPlane {
 			throw new InvalidPlaneValueException("Invalid cargo plane model");
 		}
 		this.model = model;
-	}
-
-	public double getCarryingCapacity() {
-		return carryingCapacity;
-	}
-
-	public void setCarryingCapacity(double carryingCapacity) throws InvalidPlaneValueException {
-		if (carryingCapacity <= 0) {
-			throw new InvalidPlaneValueException("Invalid carrying capacity");
-		}
-		this.carryingCapacity = carryingCapacity;
 	}
 
 	@Override

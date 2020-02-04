@@ -6,6 +6,21 @@ public class PassengerPlane extends AbstractPlane {
 
 	private int passengerCapacity;
 
+	public PassengerPlane() {
+
+	}
+
+	public int getCapacity() {
+		return passengerCapacity;
+	}
+
+	public void setCapacity(int capacity) throws InvalidPlaneValueException {
+		if (capacity <= 0) {
+			throw new InvalidPlaneValueException("Invalid passenger capacity");
+		}
+		this.passengerCapacity = capacity;
+	}
+
 	@Override
 	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
 		if (fuelConsumption < 0) {
@@ -20,17 +35,6 @@ public class PassengerPlane extends AbstractPlane {
 			throw new InvalidPlaneValueException("Invalid passenger plane model");
 		}
 		this.model = model;
-	}
-
-	public int getCapacity() {
-		return passengerCapacity;
-	}
-
-	public void setCapacity(int capacity) throws InvalidPlaneValueException {
-		if (capacity <= 0) {
-			throw new InvalidPlaneValueException("Invalid passenger capacity");
-		}
-		this.passengerCapacity = capacity;
 	}
 
 	@Override

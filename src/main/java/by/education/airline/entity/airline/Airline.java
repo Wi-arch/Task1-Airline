@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.education.airline.entity.plane.AbstractPlane;
-import by.education.airline.exception.InvalidPlaneValueException;
 
 public class Airline {
 
@@ -24,7 +23,7 @@ public class Airline {
 		return name;
 	}
 
-	public void setName(String name) throws InvalidPlaneValueException {
+	public void setName(String name) {
 		this.name = name;
 	}
 

@@ -7,9 +7,13 @@ public abstract class AbstractPlane {
 	protected double fuelConsumption;
 	protected PlaneModel model;
 
-	abstract public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException;
+	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
+		this.fuelConsumption = fuelConsumption;
+	}
 
-	abstract public void setModel(PlaneModel model) throws InvalidPlaneValueException;
+	public void setModel(PlaneModel model) throws InvalidPlaneValueException {
+		this.model = model;
+	}
 
 	public double getFuelConsumption() {
 		return fuelConsumption;
