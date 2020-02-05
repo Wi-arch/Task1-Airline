@@ -42,6 +42,10 @@ public class Airline {
 		return this.planes;
 	}
 
+	public int getNumberOfPlanes() {
+		return this.planes.size();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
