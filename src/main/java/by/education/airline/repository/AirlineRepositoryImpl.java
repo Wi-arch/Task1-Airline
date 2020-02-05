@@ -8,6 +8,8 @@ import java.util.Set;
 import by.education.airline.criterion.airline.AirlineCriterion;
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.exception.RepositoryException;
+import by.education.airline.util.AirlineParser;
+import by.education.airline.util.Reader;
 
 public enum AirlineRepositoryImpl implements AirlineRepository {
 
@@ -72,7 +74,8 @@ public enum AirlineRepositoryImpl implements AirlineRepository {
 	};
 
 	private void initAirlineRepository() {
-		// TODO
+		String airlines = Reader.getInstance().readStringFromFile(path);
+		this.airlines = AirlineParser.parseStringToAirlines(airlines);
 	}
 
 }
