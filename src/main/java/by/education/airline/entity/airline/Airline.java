@@ -1,38 +1,45 @@
 package by.education.airline.entity.airline;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import by.education.airline.entity.plane.AbstractPlane;
 
 public class Airline {
 
-	private String name;
-	private List<AbstractPlane> planes;
+	private Optional<String> name;
+	private Set<Optional<AbstractPlane>> planes;
 
 	public Airline() {
-		this.planes = new ArrayList<>();
+		this.name = Optional.empty();
+		this.planes = new HashSet<>();
 	}
 
 	public Airline(String name) {
-		this.name = name;
-		this.planes = new ArrayList<>();
+		this.name = Optional.ofNullable(name);
+		this.planes = new HashSet<>();
 	}
 
-	public String getName() {
+	public Optional<String> getName() {
 		return name;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = Optional.ofNullable(name);
 	}
 
-	public List<AbstractPlane> getPlanes() {
-		return planes;
+	public boolean addPlane(Optional<AbstractPlane> plane) {
+		return this.planes.add(plane);
 	}
 
-	public void setPlanes(List<AbstractPlane> planes) {
-		this.planes = planes;
+	public boolean addAllPlanes(Optional<Collection<? extends Optional<AbstractPlane>>> c) {
+		return this.planes.addAll(c.orElseGet(HashSet::new));
+	}
+
+	public Set<Optional<AbstractPlane>> getAllPlanes() {
+		return this.planes;
 	}
 
 	@Override

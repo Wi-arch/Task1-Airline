@@ -4,10 +4,17 @@ import by.education.airline.exception.InvalidPlaneValueException;
 
 public class PassengerPlane extends AbstractPlane {
 
+	private static int idCounter;
+
 	private int passengerCapacity;
+	private int id;
 
 	public PassengerPlane() {
+		this.id = ++idCounter;
+	}
 
+	public int getId() {
+		return id;
 	}
 
 	public int getCapacity() {
@@ -42,6 +49,7 @@ public class PassengerPlane extends AbstractPlane {
 		final int prime = 31;
 		int result = 1;
 		long temp;
+		result = prime * result + id;
 		temp = Double.doubleToLongBits(fuelConsumption);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
@@ -58,6 +66,8 @@ public class PassengerPlane extends AbstractPlane {
 		if (getClass() != obj.getClass())
 			return false;
 		PassengerPlane other = (PassengerPlane) obj;
+		if (id != other.id)
+			return false;
 		if (passengerCapacity != other.passengerCapacity)
 			return false;
 		if (Double.doubleToLongBits(fuelConsumption) != Double.doubleToLongBits(other.fuelConsumption))

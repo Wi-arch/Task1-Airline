@@ -4,10 +4,17 @@ import by.education.airline.exception.InvalidPlaneValueException;
 
 public class CargoPlane extends AbstractPlane {
 
+	private static int idCounter;
+
 	private double carryingCapacity;
+	private int id;
 
 	public CargoPlane() {
+		this.id = ++idCounter;
+	}
 
+	public int getId() {
+		return id;
 	}
 
 	public double getCarryingCapacity() {
@@ -42,6 +49,7 @@ public class CargoPlane extends AbstractPlane {
 		final int prime = 31;
 		int result = 1;
 		long temp;
+		result = prime * result + id;
 		temp = Double.doubleToLongBits(carryingCapacity);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(fuelConsumption);
@@ -59,6 +67,8 @@ public class CargoPlane extends AbstractPlane {
 		if (getClass() != obj.getClass())
 			return false;
 		CargoPlane other = (CargoPlane) obj;
+		if (id != other.id)
+			return false;
 		if (Double.doubleToLongBits(carryingCapacity) != Double.doubleToLongBits(other.carryingCapacity))
 			return false;
 		if (Double.doubleToLongBits(fuelConsumption) != Double.doubleToLongBits(other.fuelConsumption))
