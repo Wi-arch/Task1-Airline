@@ -5,18 +5,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import by.education.airline.criterion.passengerplane.PassengerPlaneCriterion;
+import by.education.airline.entity.airline.Airline;
 import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.exception.RepositoryException;
-import by.education.airline.util.PassengerPlaneParser;
+import by.education.airline.specification.Specification;
+import by.education.airline.util.PlaneParser;
 import by.education.airline.util.Reader;
 
-public enum PassengerPlaneRepositoryImpl implements PassengerPlaneRepository {
+public enum PassengerPlaneRepositoryImpl implements Repository<PassengerPlane> {
 
 	INSTANCE;
 
-	private String path;
-	private List<Optional<PassengerPlane>> passengerPlanes = new ArrayList<>();
+	private String path = "PassengerPlanes.txt";
+	List<Optional<PassengerPlane>> passengerPlaneList = new ArrayList<>();
 
 	private PassengerPlaneRepositoryImpl() {
 		initPassengerPlaneRepository();
@@ -31,51 +32,29 @@ public enum PassengerPlaneRepositoryImpl implements PassengerPlaneRepository {
 	}
 
 	@Override
-	public void addPassengerPlane(PassengerPlane passengerPlane) {
-		passengerPlanes.add(Optional.ofNullable(passengerPlane));
-	}
-
-	@Override
-	public void updatePassengerPlane(PassengerPlane passengerPlane) {
-
-		int id = passengerPlane.getId();
-		for (int i = 0; i < passengerPlanes.size(); i++) {
-			if (passengerPlanes.get(i).isPresent() && passengerPlanes.get(i).get().getId() == id) {
-				passengerPlanes.set(i, Optional.ofNullable(passengerPlane));
-				break;
-			}
-		}
-	}
-
-	@Override
-	public Optional<PassengerPlane> removePassengerPlane(PassengerPlane passengerPlane) {
-
-		int id = passengerPlane.getId();
-		for (int i = 0; i < passengerPlanes.size(); i++) {
-			if (passengerPlanes.get(i).isPresent() && passengerPlanes.get(i).get().getId() == id) {
-				return passengerPlanes.remove(i);
-			}
-		}
-		return Optional.empty();
-	}
-
-	@Override
-	public List<Optional<PassengerPlane>> getAllPassengerPlanes() {
-		return new ArrayList<>(passengerPlanes);
-	}
-
-	@Override
-	public Set<PassengerPlane> execute(PassengerPlaneCriterion criterion) throws RepositoryException {
-
-		if (criterion == null) {
+	public Set<PassengerPlane> execute(Specification<PassengerPlane> specification) throws RepositoryException {
+		if (specification == null) {
 			throw new RepositoryException("Null criterion");
 		}
-		return criterion.execute();
+		return specification.execute();
 	}
 
 	private void initPassengerPlaneRepository() {
 		String source = Reader.getInstance().readStringFromFile(path);
-		this.passengerPlanes = PassengerPlaneParser.parseStringToPassengerPlanes(source);
+		passengerPlaneList = PlaneParser.parseStringToPassengerPlaneList(source);
+		for (Optional<PassengerPlane> plane : passengerPlaneList) {
+			String name = plane.get().getAirlineName().orElse("");
+			Repository<Airline> airlineRepository = AirlineRepositoryImpl.INSTANCE;
+			Specification<Airline> specification = new FindAirlineByName(name);
+			try {
+				Set<Airline> airlines = airlineRepository.execute(specification);
+				if (!airlines.isEmpty()) {
+					airlines.iterator().next().addPlane(plane.get());
+				}
+			} catch (RepositoryException e) {
+				// TODO write log
+			}
+		}
 	}
 
 }

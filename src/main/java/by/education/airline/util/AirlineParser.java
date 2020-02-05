@@ -11,7 +11,7 @@ public class AirlineParser {
 
 	private final static String AIRLINE_NAME_REGEX = "AirlineName=";
 
-	public static List<Optional<Airline>> parseStringToAirlines(String source) {
+	public static List<Optional<Airline>> parseStringToAirlineList(String source) {
 
 		List<Optional<Airline>> result = new LinkedList<>();
 

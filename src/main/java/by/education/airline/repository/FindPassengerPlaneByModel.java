@@ -1,4 +1,4 @@
-package by.education.airline.criterion.passengerplane;
+package by.education.airline.repository;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -6,13 +6,13 @@ import java.util.Set;
 
 import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.entity.plane.PassengerPlaneModel;
-import by.education.airline.repository.PassengerPlaneRepositoryImpl;
+import by.education.airline.specification.Specification;
 
-public class FindPassengerPlanesByModel implements PassengerPlaneCriterion {
+public class FindPassengerPlaneByModel implements Specification<PassengerPlane> {
 
 	private PassengerPlaneModel model;
 
-	public FindPassengerPlanesByModel(PassengerPlaneModel model) {
+	public FindPassengerPlaneByModel(PassengerPlaneModel model) {
 		this.model = model;
 	}
 
@@ -21,7 +21,7 @@ public class FindPassengerPlanesByModel implements PassengerPlaneCriterion {
 
 		Set<PassengerPlane> result = new HashSet<>();
 
-		for (Optional<PassengerPlane> plane : PassengerPlaneRepositoryImpl.INSTANCE.getAllPassengerPlanes()) {
+		for (Optional<PassengerPlane> plane : PassengerPlaneRepositoryImpl.INSTANCE.passengerPlaneList) {
 			if (plane.isPresent() && plane.get().getModel() == model) {
 				result.add(plane.get());
 			}

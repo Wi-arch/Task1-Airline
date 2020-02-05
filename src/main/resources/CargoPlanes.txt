@@ -1,0 +1,12 @@
+ERROR FuelConsumption=150,5 PlaneModel=AIRBUS319 CarryingCapacity=1500,0 AirlineName=Air Costa  ...
+Bad data ...
+///qwe123
+
+FuelConsumption=150,5 PlaneModel=AIRBUS319 CarryingCapacity=1500,0 AirlineName=Air Costa
+FuelConsumption=165,1 PlaneModel=AIRBUS319 CarryingCapacity=1600,0 AirlineName=Air Costa
+
+FuelConsumption=180,7 PlaneModel=AIRBUS300 CarryingCapacity=1800,0 AirlineName=GoAir
+FuelConsumption=175,0 PlaneModel=AIRBUS300 CarryingCapacity=1750,0 AirlineName=GoAir
+FuelConsumption=188,0 PlaneModel=Boeing747 CarryingCapacity=1960,0 AirlineName=GoAir
+FuelConsumption=190,7 PlaneModel=Boeing747 CarryingCapacity=1900,0 AirlineName=Air Costa
+FuelConsumption=185,0 PlaneModel=Boeing747 CarryingCapacity=1950,0 AirlineName=GoAir

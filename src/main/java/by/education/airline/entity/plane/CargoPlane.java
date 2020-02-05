@@ -1,6 +1,7 @@
 package by.education.airline.entity.plane;
 
 import by.education.airline.exception.InvalidPlaneValueException;
+import by.education.airline.validator.CargoPlaneValidator;
 
 public class CargoPlane extends AbstractPlane {
 
@@ -38,7 +39,7 @@ public class CargoPlane extends AbstractPlane {
 
 	@Override
 	public void setModel(PlaneModel model) throws InvalidPlaneValueException {
-		if (!(model instanceof CargoPlaneModel)) {
+		if (!CargoPlaneValidator.isModelCargoPlane(model)) {
 			throw new InvalidPlaneValueException("Invalid cargo plane model");
 		}
 		this.model = model;

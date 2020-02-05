@@ -1,13 +1,13 @@
-package by.education.airline.criterion.airline;
+package by.education.airline.repository;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import by.education.airline.entity.airline.Airline;
-import by.education.airline.repository.AirlineRepositoryImpl;
+import by.education.airline.specification.Specification;
 
-public class FindAirlineByName implements AirlineCriterion {
+public class FindAirlineByName implements Specification<Airline> {
 
 	private Optional<String> name;
 
@@ -20,7 +20,7 @@ public class FindAirlineByName implements AirlineCriterion {
 
 		Set<Airline> result = new HashSet<>();
 
-		for (Optional<Airline> airline : AirlineRepositoryImpl.INSTANCE.getAllAirlines()) {
+		for (Optional<Airline> airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
 
 			if (airline.isPresent() && airline.get().getName().equals(name)) {
 				result.add(airline.get());
@@ -28,4 +28,5 @@ public class FindAirlineByName implements AirlineCriterion {
 		}
 		return result;
 	}
+
 }

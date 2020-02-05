@@ -5,18 +5,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import by.education.airline.criterion.cargoplane.CargoPlaneCriterion;
+import by.education.airline.entity.airline.Airline;
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.exception.RepositoryException;
-import by.education.airline.util.CargoPlaneParser;
+import by.education.airline.specification.Specification;
+import by.education.airline.util.PlaneParser;
 import by.education.airline.util.Reader;
 
-public enum CargoPlaneRepositoryImpl implements CargoPlaneRepository {
+public enum CargoPlaneRepositoryImpl implements Repository<CargoPlane> {
 
 	INSTANCE;
 
-	private String path;
-	private List<Optional<CargoPlane>> cargoPlanes = new ArrayList<>();
+	private String path = "CargoPlanes.txt";
+	List<Optional<CargoPlane>> cargoPlaneList = new ArrayList<>();
 
 	private CargoPlaneRepositoryImpl() {
 		initCargoPlaneRepository();
@@ -31,52 +32,30 @@ public enum CargoPlaneRepositoryImpl implements CargoPlaneRepository {
 	}
 
 	@Override
-	public void addCargoPlane(CargoPlane cargoPlane) {
-		cargoPlanes.add(Optional.ofNullable(cargoPlane));
-	}
-
-	@Override
-	public void updateCargoPlane(CargoPlane cargoPlane) {
-
-		int id = cargoPlane.getId();
-		for (int i = 0; i < cargoPlanes.size(); i++) {
-			if (cargoPlanes.get(i).isPresent() && cargoPlanes.get(i).get().getId() == id) {
-				cargoPlanes.set(i, Optional.ofNullable(cargoPlane));
-				break;
-			}
-		}
-	}
-
-	@Override
-	public Optional<CargoPlane> removeCargoPlane(CargoPlane cargoPlane) {
-
-		int id = cargoPlane.getId();
-		for (int i = 0; i < cargoPlanes.size(); i++) {
-			if (cargoPlanes.get(i).isPresent() && cargoPlanes.get(i).get().getId() == id) {
-				return cargoPlanes.remove(i);
-			}
-		}
-		return Optional.empty();
-	}
-
-	@Override
-	public List<Optional<CargoPlane>> getAllCargoPlanes() {
-		return new ArrayList<>(cargoPlanes);
-	}
-
-	@Override
-	public Set<CargoPlane> execute(CargoPlaneCriterion criterion) throws RepositoryException {
-
-		if (criterion == null) {
+	public Set<CargoPlane> execute(Specification<CargoPlane> specification) throws RepositoryException {
+		if (specification == null) {
 			throw new RepositoryException("Null criterion");
 		}
 
-		return criterion.execute();
+		return specification.execute();
 	}
 
 	private void initCargoPlaneRepository() {
 		String source = Reader.getInstance().readStringFromFile(path);
-		this.cargoPlanes = CargoPlaneParser.parseStringToCargoPlanes(source);
+		cargoPlaneList = PlaneParser.parseStringToCargoPlaneList(source);
+		for (Optional<CargoPlane> plane : cargoPlaneList) {
+			String name = plane.get().getAirlineName().orElse("");
+			Repository<Airline> airlineRepository = AirlineRepositoryImpl.INSTANCE;
+			Specification<Airline> specification = new FindAirlineByName(name);
+			try {
+				Set<Airline> airlines = airlineRepository.execute(specification);
+				if (!airlines.isEmpty()) {
+					airlines.iterator().next().addPlane(plane.get());
+				}
+			} catch (RepositoryException e) {
+				// TODO write log
+			}
+		}
 	}
 
 }

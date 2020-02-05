@@ -1,6 +1,5 @@
 package by.education.airline.entity.airline;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -10,16 +9,16 @@ import by.education.airline.entity.plane.AbstractPlane;
 public class Airline {
 
 	private Optional<String> name;
-	private Set<Optional<AbstractPlane>> planes;
+	private Set<AbstractPlane> planeSet;
 
 	public Airline() {
 		this.name = Optional.empty();
-		this.planes = new HashSet<>();
+		this.planeSet = new HashSet<>();
 	}
 
 	public Airline(String name) {
 		this.name = Optional.ofNullable(name);
-		this.planes = new HashSet<>();
+		this.planeSet = new HashSet<>();
 	}
 
 	public Optional<String> getName() {
@@ -30,20 +29,16 @@ public class Airline {
 		this.name = Optional.ofNullable(name);
 	}
 
-	public boolean addPlane(Optional<AbstractPlane> plane) {
-		return this.planes.add(plane);
+	public boolean addPlane(AbstractPlane plane) {
+		return plane == null ? false : planeSet.add(plane);
 	}
 
-	public boolean addAllPlanes(Optional<Collection<? extends Optional<AbstractPlane>>> c) {
-		return this.planes.addAll(c.orElseGet(HashSet::new));
-	}
-
-	public Set<Optional<AbstractPlane>> getAllPlanes() {
-		return this.planes;
+	public Set<AbstractPlane> getAllPlanes() {
+		return this.planeSet;
 	}
 
 	public int getNumberOfPlanes() {
-		return this.planes.size();
+		return this.planeSet.size();
 	}
 
 	@Override
@@ -51,7 +46,7 @@ public class Airline {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((planes == null) ? 0 : planes.hashCode());
+		result = prime * result + ((planeSet == null) ? 0 : planeSet.hashCode());
 		return result;
 	}
 
@@ -69,17 +64,17 @@ public class Airline {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (planes == null) {
-			if (other.planes != null)
+		if (planeSet == null) {
+			if (other.planeSet != null)
 				return false;
-		} else if (!planes.equals(other.planes))
+		} else if (!planeSet.equals(other.planeSet))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Airline [name=" + name + ", planes=" + planes + "]";
+		return "Airline [name=" + name + ", planes=" + planeSet + "]";
 	}
 
 }

@@ -1,17 +1,17 @@
-package by.education.airline.criterion.passengerplane;
+package by.education.airline.repository;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import by.education.airline.entity.plane.PassengerPlane;
-import by.education.airline.repository.PassengerPlaneRepositoryImpl;
+import by.education.airline.specification.Specification;
 
-public class FindPassengerPlanesByCapacity implements PassengerPlaneCriterion {
+public class FindPassengerPlaneByCapacity implements Specification<PassengerPlane> {
 
 	private int capacity;
 
-	public FindPassengerPlanesByCapacity(int capacity) {
+	public FindPassengerPlaneByCapacity(int capacity) {
 		this.capacity = capacity;
 	}
 
@@ -20,7 +20,7 @@ public class FindPassengerPlanesByCapacity implements PassengerPlaneCriterion {
 
 		Set<PassengerPlane> result = new HashSet<>();
 
-		for (Optional<PassengerPlane> plane : PassengerPlaneRepositoryImpl.INSTANCE.getAllPassengerPlanes()) {
+		for (Optional<PassengerPlane> plane : PassengerPlaneRepositoryImpl.INSTANCE.passengerPlaneList) {
 			if (plane.isPresent() && plane.get().getCapacity() == capacity) {
 				result.add(plane.get());
 			}
