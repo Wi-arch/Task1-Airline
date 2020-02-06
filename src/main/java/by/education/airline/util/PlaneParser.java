@@ -11,16 +11,16 @@ import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.exception.InvalidPlaneValueException;
 
 public class PlaneParser {
-
-	private final static String CARGO_PLANE_REGEX = "FuelConsumption=\\d+[.,]\\d{0,}\\s+PlaneModel=\\w+\\s+"
-			+ "CarryingCapacity=\\d+[.,]\\d{0,}\\s+AirlineName=\\w+";
-	private final static String PASSENGER_PLANE_REGEX = "FuelConsumption=\\d+[.,]\\d{0,}\\s+PlaneModel=\\w+\\s+"
-			+ "PassengerCapacity=\\d+[.,]\\d{0,}\\s+AirlineName=\\w+";
-	private final static String FUEL_CONSUMPTION_REGEX = "FuelConsumption=(\\d+)\\s+.*";
+//FuelConsumption=190,7 PlaneModel=Boeing747 CarryingCapacity=1900,0 AirlineName=Air Costa
+	private final static String CARGO_PLANE_REGEX = "FuelConsumption=\\d+[.]\\d{0,}\\s+PlaneModel=\\w+\\s+"
+			+ "CarryingCapacity=\\d+[.]\\d{0,}\\s+AirlineName=.*";
+	private final static String PASSENGER_PLANE_REGEX = "FuelConsumption=\\d+[.]\\d{0,}\\s+PlaneModel=\\w+\\s+"
+			+ "PassengerCapacity=\\d+[.]\\d{0,}\\s+AirlineName=.*";
+	private final static String FUEL_CONSUMPTION_REGEX = "FuelConsumption=(\\d+[.]\\d{0,})\\s+.*";
 	private final static String PLANE_MODEL_REGEX = ".*PlaneModel=(\\w+)\\s+.*";
 	private final static String PASSENGER_CAPACITY_REGEX = ".*PassengerCapacity=(\\d+)";
-	private final static String AIRLINE_NAME_REGEX = ".*AirlineName=(\\w+)";
-	private final static String CARRYING_CAPACITY_REGEX = ".*CarryingCapacity=(\\d+)\\s+.*";
+	private final static String AIRLINE_NAME_REGEX = ".*AirlineName=(.*)";
+	private final static String CARRYING_CAPACITY_REGEX = ".*CarryingCapacity=(\\d+[.]\\d{0,})\\s+.*";
 	private static Scanner scanner;
 
 	public static List<Optional<PassengerPlane>> parseStringToPassengerPlaneList(String source) {
@@ -67,6 +67,7 @@ public class PlaneParser {
 					double carryingCapacity = Double.valueOf(planeString.replaceAll(CARRYING_CAPACITY_REGEX, "$1"));
 					plane.setCarryingCapacity(carryingCapacity);
 					plane.setAirlineName(Optional.ofNullable(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1")));
+
 					result.add(Optional.ofNullable(plane));
 				} catch (RuntimeException | InvalidPlaneValueException e) {
 					// TODO write log

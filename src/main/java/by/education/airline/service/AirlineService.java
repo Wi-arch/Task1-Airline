@@ -1,5 +1,7 @@
 package by.education.airline.service;
 
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.Set;
 
 import by.education.airline.entity.airline.Airline;
@@ -14,6 +16,7 @@ import by.education.airline.repository.FindAirlineByName;
 import by.education.airline.repository.FindAirlineSetByNumberOfPlanes;
 import by.education.airline.repository.GetAirlineSet;
 import by.education.airline.repository.Repository;
+import by.education.airline.repository.SortPlaneSetInAirline;
 import by.education.airline.specification.Specification;
 import by.education.airline.validator.CargoPlaneValidator;
 import by.education.airline.validator.PassengerPlaneValidator;
@@ -114,5 +117,19 @@ public class AirlineService {
 			throw new ServiceException(e);
 		}
 		return airlineSet;
+	}
+
+	public void sortPlaneListInAirline(Optional<String> airlineName, Comparator<AbstractPlane> comparator)
+			throws ServiceException {
+
+		if (airlineName == null || comparator == null) {
+			throw new ServiceException("Null airline");
+		}
+		specification = new SortPlaneSetInAirline(airlineName, comparator);
+		try {
+			repository.execute(specification);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		}
 	}
 }

@@ -1,24 +1,24 @@
 package by.education.airline.entity.airline;
 
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import by.education.airline.entity.plane.AbstractPlane;
 
 public class Airline {
 
 	private Optional<String> name;
-	private Set<AbstractPlane> planeSet;
+	private List<AbstractPlane> planeList;
 
 	public Airline() {
 		this.name = Optional.empty();
-		this.planeSet = new HashSet<>();
+		this.planeList = new LinkedList<>();
 	}
 
 	public Airline(String name) {
 		this.name = Optional.ofNullable(name);
-		this.planeSet = new HashSet<>();
+		this.planeList = new LinkedList<>();
 	}
 
 	public Optional<String> getName() {
@@ -30,15 +30,15 @@ public class Airline {
 	}
 
 	public boolean addPlane(AbstractPlane plane) {
-		return plane == null ? false : planeSet.add(plane);
+		return plane == null ? false : planeList.add(plane);
 	}
 
-	public Set<AbstractPlane> getAllPlanes() {
-		return this.planeSet;
+	public List<AbstractPlane> getAllPlanes() {
+		return this.planeList;
 	}
 
 	public int getNumberOfPlanes() {
-		return this.planeSet.size();
+		return this.planeList.size();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class Airline {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((planeSet == null) ? 0 : planeSet.hashCode());
+		result = prime * result + ((planeList == null) ? 0 : planeList.hashCode());
 		return result;
 	}
 
@@ -64,17 +64,17 @@ public class Airline {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (planeSet == null) {
-			if (other.planeSet != null)
+		if (planeList == null) {
+			if (other.planeList != null)
 				return false;
-		} else if (!planeSet.equals(other.planeSet))
+		} else if (!planeList.equals(other.planeList))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Airline [name=" + name + ", planes=" + planeSet + "]";
+		return "Airline [name=" + name + ", planes=" + planeList + "]";
 	}
 
 }

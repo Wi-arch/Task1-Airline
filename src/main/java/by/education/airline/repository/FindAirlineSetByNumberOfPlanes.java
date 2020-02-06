@@ -1,7 +1,6 @@
 package by.education.airline.repository;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import by.education.airline.entity.airline.Airline;
@@ -20,10 +19,10 @@ public class FindAirlineSetByNumberOfPlanes implements Specification<Airline> {
 
 		Set<Airline> result = new HashSet<>();
 
-		for (Optional<Airline> airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
+		for (Airline airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
 
-			if (airline.isPresent() && airline.get().getNumberOfPlanes() == planesNumber) {
-				result.add(airline.get());
+			if (airline != null && airline.getNumberOfPlanes() == planesNumber) {
+				result.add(airline);
 			}
 		}
 		return result;

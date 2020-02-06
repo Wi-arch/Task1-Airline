@@ -20,10 +20,10 @@ public class FindAirlineByName implements Specification<Airline> {
 
 		Set<Airline> result = new HashSet<>();
 
-		for (Optional<Airline> airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
+		for (Airline airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
 
-			if (airline.isPresent() && airline.get().getName().equals(name)) {
-				result.add(airline.get());
+			if (airline != null && airline.getName().equals(name)) {
+				result.add(airline);
 			}
 		}
 		return result;

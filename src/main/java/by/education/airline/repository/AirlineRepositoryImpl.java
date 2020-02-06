@@ -2,7 +2,6 @@ package by.education.airline.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import by.education.airline.entity.airline.Airline;
@@ -15,8 +14,8 @@ public enum AirlineRepositoryImpl implements Repository<Airline> {
 
 	INSTANCE;
 
-	private String path = "Airlines.txt";
-	List<Optional<Airline>> airlineList = new ArrayList<>();
+	private String path = "src/main/resources/Airlines.txt";
+	List<Airline> airlineList = new ArrayList<>();
 
 	private AirlineRepositoryImpl() {
 		initAirlineRepository();

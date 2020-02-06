@@ -16,7 +16,7 @@ public enum PassengerPlaneRepositoryImpl implements Repository<PassengerPlane> {
 
 	INSTANCE;
 
-	private String path = "PassengerPlanes.txt";
+	private String path = "src/main/resources/PassengerPlanes.txt";
 	List<Optional<PassengerPlane>> passengerPlaneList = new ArrayList<>();
 
 	private PassengerPlaneRepositoryImpl() {
@@ -47,9 +47,9 @@ public enum PassengerPlaneRepositoryImpl implements Repository<PassengerPlane> {
 			Repository<Airline> airlineRepository = AirlineRepositoryImpl.INSTANCE;
 			Specification<Airline> specification = new FindAirlineByName(name);
 			try {
-				Set<Airline> airlines = airlineRepository.execute(specification);
-				if (!airlines.isEmpty()) {
-					airlines.iterator().next().addPlane(plane.get());
+				Set<Airline> airline = airlineRepository.execute(specification);
+				if (!airline.isEmpty()) {
+					airline.iterator().next().addPlane(plane.get());
 				}
 			} catch (RepositoryException e) {
 				// TODO write log

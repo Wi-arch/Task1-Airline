@@ -2,19 +2,19 @@
 Bad data ...
 ///qwe123
 
-FuelConsumption=150,5 PlaneModel=BOEING737 PassengerCapacity=400 AirlineName=Air Costa
-FuelConsumption=165,1 PlaneModel=BOEING737 PassengerCapacity=600 AirlineName=Air Costa
+FuelConsumption=150.5 PlaneModel=BOEING737 PassengerCapacity=400 AirlineName=Air Costa
+FuelConsumption=165.1 PlaneModel=BOEING737 PassengerCapacity=600 AirlineName=Air Costa
 
-FuelConsumption=180,7 PlaneModel=AIRBUS310 PassengerCapacity=500 AirlineName=GoAir
-FuelConsumption=175,0 PlaneModel=AIRBUS310 PassengerCapacity=600 AirlineName=GoAir
+FuelConsumption=180.7 PlaneModel=AIRBUS310 PassengerCapacity=500 AirlineName=GoAir
+FuelConsumption=175.0 PlaneModel=AIRBUS310 PassengerCapacity=600 AirlineName=GoAir
 
-FuelConsumption=180,9 PlaneModel=AIRBUS330 PassengerCapacity=500 AirlineName=Air Costa
-FuelConsumption=185,0 PlaneModel=AIRBUS330 PassengerCapacity=550 AirlineName=GoAir
+FuelConsumption=180.9 PlaneModel=AIRBUS330 PassengerCapacity=500 AirlineName=Air Costa
+FuelConsumption=185.0 PlaneModel=AIRBUS330 PassengerCapacity=550 AirlineName=GoAir
 
-FuelConsumption=150,5 PlaneModel=BOEING737 PassengerCapacity=400 AirlineName=Air Costa
-FuelConsumption=165,1 PlaneModel=BOEING737 PassengerCapacity=600 AirlineName=Air Costa
+FuelConsumption=150.5 PlaneModel=BOEING737 PassengerCapacity=400 AirlineName=Air Costa
+FuelConsumption=165.1 PlaneModel=BOEING737 PassengerCapacity=600 AirlineName=Air Costa
 
-FuelConsumption=180,7 PlaneModel=AIRBUS310 PassengerCapacity=500 AirlineName=GoAir
-FuelConsumption=175,0 PlaneModel=AIRBUS310 PassengerCapacity=600 AirlineName=GoAir
-FuelConsumption=180,9 PlaneModel=AIRBUS330 PassengerCapacity=500 AirlineName=Air Costa
-FuelConsumption=185,0 PlaneModel=AIRBUS330 PassengerCapacity=550 AirlineName=GoAir
+FuelConsumption=180.7 PlaneModel=AIRBUS310 PassengerCapacity=500 AirlineName=GoAir
+FuelConsumption=175.0 PlaneModel=AIRBUS310 PassengerCapacity=600 AirlineName=GoAir
+FuelConsumption=180.9 PlaneModel=AIRBUS330 PassengerCapacity=500 AirlineName=Air Costa
+FuelConsumption=185.0 PlaneModel=AIRBUS330 PassengerCapacity=550 AirlineName=GoAir
