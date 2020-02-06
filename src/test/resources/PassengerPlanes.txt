@@ -1,0 +1,2 @@
+FuelConsumption=180.9 PlaneModel=AIRBUS330 PassengerCapacity=500 AirlineName=Air Costa
+FuelConsumption=185.0 PlaneModel=AIRBUS330 PassengerCapacity=550 AirlineName=GoAir

@@ -8,17 +8,18 @@ import java.util.Scanner;
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.entity.plane.CargoPlaneModel;
 import by.education.airline.entity.plane.PassengerPlane;
+import by.education.airline.entity.plane.PassengerPlaneModel;
 import by.education.airline.exception.InvalidPlaneValueException;
 
 public class PlaneParser {
-//FuelConsumption=190,7 PlaneModel=Boeing747 CarryingCapacity=1900,0 AirlineName=Air Costa
+
 	private final static String CARGO_PLANE_REGEX = "FuelConsumption=\\d+[.]\\d{0,}\\s+PlaneModel=\\w+\\s+"
 			+ "CarryingCapacity=\\d+[.]\\d{0,}\\s+AirlineName=.*";
 	private final static String PASSENGER_PLANE_REGEX = "FuelConsumption=\\d+[.]\\d{0,}\\s+PlaneModel=\\w+\\s+"
-			+ "PassengerCapacity=\\d+[.]\\d{0,}\\s+AirlineName=.*";
+			+ "PassengerCapacity=\\d+([.]\\d{0,})?\\s+AirlineName=.*";
 	private final static String FUEL_CONSUMPTION_REGEX = "FuelConsumption=(\\d+[.]\\d{0,})\\s+.*";
 	private final static String PLANE_MODEL_REGEX = ".*PlaneModel=(\\w+)\\s+.*";
-	private final static String PASSENGER_CAPACITY_REGEX = ".*PassengerCapacity=(\\d+)";
+	private final static String PASSENGER_CAPACITY_REGEX = ".*PassengerCapacity=(\\d+)\\s+.*";
 	private final static String AIRLINE_NAME_REGEX = ".*AirlineName=(.*)";
 	private final static String CARRYING_CAPACITY_REGEX = ".*CarryingCapacity=(\\d+[.]\\d{0,})\\s+.*";
 	private static Scanner scanner;
@@ -35,7 +36,8 @@ public class PlaneParser {
 					PassengerPlane plane = new PassengerPlane();
 					double fuelConsumption = Double.valueOf(planeString.replaceAll(FUEL_CONSUMPTION_REGEX, "$1"));
 					plane.setFuelConsumption(fuelConsumption);
-					CargoPlaneModel model = CargoPlaneModel.valueOf(planeString.replaceAll(PLANE_MODEL_REGEX, "$1"));
+					PassengerPlaneModel model = PassengerPlaneModel
+							.valueOf(planeString.replaceAll(PLANE_MODEL_REGEX, "$1").toUpperCase());
 					plane.setModel(model);
 					int capacity = Integer.valueOf(planeString.replaceAll(PASSENGER_CAPACITY_REGEX, "$1"));
 					plane.setCapacity(capacity);
@@ -44,7 +46,6 @@ public class PlaneParser {
 				} catch (RuntimeException | InvalidPlaneValueException e) {
 					// TODO write log
 				}
-
 			}
 		}
 		return result;
@@ -62,7 +63,8 @@ public class PlaneParser {
 					CargoPlane plane = new CargoPlane();
 					double fuelConsumption = Double.valueOf(planeString.replaceAll(FUEL_CONSUMPTION_REGEX, "$1"));
 					plane.setFuelConsumption(fuelConsumption);
-					CargoPlaneModel model = CargoPlaneModel.valueOf(planeString.replaceAll(PLANE_MODEL_REGEX, "$1"));
+					CargoPlaneModel model = CargoPlaneModel
+							.valueOf(planeString.replaceAll(PLANE_MODEL_REGEX, "$1").toUpperCase());
 					plane.setModel(model);
 					double carryingCapacity = Double.valueOf(planeString.replaceAll(CARRYING_CAPACITY_REGEX, "$1"));
 					plane.setCarryingCapacity(carryingCapacity);

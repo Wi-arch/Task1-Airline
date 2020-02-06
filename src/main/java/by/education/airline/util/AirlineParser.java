@@ -12,6 +12,10 @@ public class AirlineParser {
 
 	public static List<Airline> parseStringToAirlineList(String source) {
 
+		if (source == null) {
+			// TODO write log
+			return new LinkedList<Airline>();
+		}
 		List<Airline> result = new LinkedList<>();
 
 		@SuppressWarnings("resource")
