@@ -8,12 +8,12 @@ import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.entity.plane.PassengerPlaneModel;
 import by.education.airline.exception.RepositoryException;
 import by.education.airline.exception.ServiceException;
-import by.education.airline.repository.AddPassengerPlane;
-import by.education.airline.repository.FindPassengerPlaneSetByCapacity;
-import by.education.airline.repository.FindPassengerPlaneSetByModel;
-import by.education.airline.repository.GetPassengerPlaneSet;
-import by.education.airline.repository.PassengerPlaneRepositoryImpl;
 import by.education.airline.repository.Repository;
+import by.education.airline.repository.passengerplane.AddPassengerPlane;
+import by.education.airline.repository.passengerplane.FindPassengerPlaneSetByCapacity;
+import by.education.airline.repository.passengerplane.FindPassengerPlaneSetByModel;
+import by.education.airline.repository.passengerplane.GetPassengerPlaneSet;
+import by.education.airline.repository.passengerplane.PassengerPlaneRepositoryImpl;
 import by.education.airline.specification.Specification;
 
 public class PassengerPlaneService {

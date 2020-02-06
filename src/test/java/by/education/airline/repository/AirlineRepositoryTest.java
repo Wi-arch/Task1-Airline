@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.exception.RepositoryException;
+import by.education.airline.repository.airline.AirlineRepositoryImpl;
+import by.education.airline.repository.airline.FindAirlineByName;
+import by.education.airline.repository.airline.GetAirlineSet;
 
 public class AirlineRepositoryTest {
 

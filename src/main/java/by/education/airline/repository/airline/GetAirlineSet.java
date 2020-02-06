@@ -1,4 +1,4 @@
-package by.education.airline.repository;
+package by.education.airline.repository.airline;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,22 +6,13 @@ import java.util.Set;
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.specification.Specification;
 
-public class FindAirlineSetByNumberOfPlanes implements Specification<Airline> {
-
-	private int planesNumber;
-
-	public FindAirlineSetByNumberOfPlanes(int planesNumber) {
-		this.planesNumber = planesNumber;
-	}
+public class GetAirlineSet implements Specification<Airline> {
 
 	@Override
 	public Set<Airline> execute() {
-
 		Set<Airline> result = new HashSet<>();
-
 		for (Airline airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
-
-			if (airline != null && airline.getNumberOfPlanes() == planesNumber) {
+			if (airline != null) {
 				result.add(airline);
 			}
 		}

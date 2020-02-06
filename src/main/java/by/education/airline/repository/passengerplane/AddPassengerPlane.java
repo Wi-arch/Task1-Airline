@@ -1,4 +1,4 @@
-package by.education.airline.repository;
+package by.education.airline.repository.passengerplane;
 
 import java.util.Optional;
 import java.util.Set;

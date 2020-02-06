@@ -1,4 +1,4 @@
-package by.education.airline.repository;
+package by.education.airline.repository.airline;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.exception.RepositoryException;
+import by.education.airline.repository.Repository;
 import by.education.airline.specification.Specification;
 import by.education.airline.util.AirlineParser;
 import by.education.airline.util.Reader;

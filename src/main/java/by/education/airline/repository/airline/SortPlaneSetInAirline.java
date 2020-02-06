@@ -1,4 +1,4 @@
-package by.education.airline.repository;
+package by.education.airline.repository.airline;
 
 import java.util.Collections;
 import java.util.Comparator;

@@ -7,12 +7,12 @@ import org.apache.log4j.Logger;
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.exception.RepositoryException;
 import by.education.airline.exception.ServiceException;
-import by.education.airline.repository.AddCargoPlane;
-import by.education.airline.repository.CargoPlaneRepositoryImpl;
-import by.education.airline.repository.FindCargoPlaneSetByCarryingCapacity;
-import by.education.airline.repository.FindCargoPlaneSetByFuelConsumptionRange;
-import by.education.airline.repository.GetCargoPlaneSet;
 import by.education.airline.repository.Repository;
+import by.education.airline.repository.cargoplane.AddCargoPlane;
+import by.education.airline.repository.cargoplane.CargoPlaneRepositoryImpl;
+import by.education.airline.repository.cargoplane.FindCargoPlaneSetByCarryingCapacity;
+import by.education.airline.repository.cargoplane.FindCargoPlaneSetByFuelConsumptionRange;
+import by.education.airline.repository.cargoplane.GetCargoPlaneSet;
 import by.education.airline.specification.Specification;
 
 public class CargoPlaneService {

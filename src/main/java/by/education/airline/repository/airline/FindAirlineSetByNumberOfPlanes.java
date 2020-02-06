@@ -1,18 +1,17 @@
-package by.education.airline.repository;
+package by.education.airline.repository.airline;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.specification.Specification;
 
-public class FindAirlineByName implements Specification<Airline> {
+public class FindAirlineSetByNumberOfPlanes implements Specification<Airline> {
 
-	private Optional<String> name;
+	private int planesNumber;
 
-	public FindAirlineByName(String name) {
-		this.name = Optional.ofNullable(name);
+	public FindAirlineSetByNumberOfPlanes(int planesNumber) {
+		this.planesNumber = planesNumber;
 	}
 
 	@Override
@@ -22,7 +21,7 @@ public class FindAirlineByName implements Specification<Airline> {
 
 		for (Airline airline : AirlineRepositoryImpl.INSTANCE.airlineList) {
 
-			if (airline != null && airline.getName().equals(name)) {
+			if (airline != null && airline.getNumberOfPlanes() == planesNumber) {
 				result.add(airline);
 			}
 		}
