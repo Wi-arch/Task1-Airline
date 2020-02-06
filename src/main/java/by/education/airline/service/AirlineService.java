@@ -1,20 +1,31 @@
 package by.education.airline.service;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.entity.plane.AbstractPlane;
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.entity.plane.PassengerPlane;
+import by.education.airline.exception.RepositoryException;
 import by.education.airline.exception.ServiceException;
+import by.education.airline.repository.AddAirline;
+import by.education.airline.repository.AirlineRepositoryImpl;
+import by.education.airline.repository.FindAirlineByName;
+import by.education.airline.repository.FindAirlineSetByNumberOfPlanes;
+import by.education.airline.repository.GetAirlineSet;
+import by.education.airline.repository.Repository;
+import by.education.airline.specification.Specification;
 import by.education.airline.validator.CargoPlaneValidator;
 import by.education.airline.validator.PassengerPlaneValidator;
 
 public class AirlineService {
 
+	private final Repository<Airline> repository;
+	private Specification<Airline> specification;
+	private Set<Airline> airlineSet;
+
 	private AirlineService() {
+		repository = AirlineRepositoryImpl.INSTANCE;
 	}
 
 	private static class AirlineServiceInstance {
@@ -56,10 +67,52 @@ public class AirlineService {
 		return totalCapacity;
 	}
 
-	public void sortPlanes(Airline airline, Comparator<? super AbstractPlane> c) throws ServiceException {
+	public Set<Airline> getAirlineSetByNumberOfPlanes(int planesNumber) throws ServiceException {
+
+		specification = new FindAirlineSetByNumberOfPlanes(planesNumber);
+		try {
+			airlineSet = repository.execute(specification);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		}
+		return airlineSet;
+	}
+
+	public void addAirline(Airline airline) throws ServiceException {
+
 		if (airline == null) {
 			throw new ServiceException("Null airline");
 		}
-		Collections.sort(airline.getAllPlanes().stream().collect(Collectors.toList()), c);
+		specification = new AddAirline(airline);
+		try {
+			repository.execute(specification);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	public Set<Airline> getAllAirlines() throws ServiceException {
+
+		specification = new GetAirlineSet();
+		try {
+			airlineSet = repository.execute(specification);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		}
+		return airlineSet;
+	}
+
+	public Set<Airline> getAirlineByName(String airlineName) throws ServiceException {
+
+		if (airlineName == null) {
+			throw new ServiceException("Null airline name");
+		}
+		specification = new FindAirlineByName(airlineName);
+		try {
+			airlineSet = repository.execute(specification);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		}
+		return airlineSet;
 	}
 }

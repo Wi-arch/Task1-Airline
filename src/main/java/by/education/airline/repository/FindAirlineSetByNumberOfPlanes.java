@@ -7,11 +7,11 @@ import java.util.Set;
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.specification.Specification;
 
-public class FindAirlineByNumberOfPlanes implements Specification<Airline> {
+public class FindAirlineSetByNumberOfPlanes implements Specification<Airline> {
 
 	private int planesNumber;
 
-	public FindAirlineByNumberOfPlanes(int planesNumber) {
+	public FindAirlineSetByNumberOfPlanes(int planesNumber) {
 		this.planesNumber = planesNumber;
 	}
 

@@ -7,10 +7,7 @@ import by.education.airline.entity.plane.PlaneModel;
 public class CargoPlaneValidator {
 
 	public static boolean isThePlaneCargoPlane(AbstractPlane plane) {
-		if (plane != null && isModelCargoPlane(plane.getModel())) {
-			return true;
-		}
-		return false;
+		return plane != null && isModelCargoPlane(plane.getModel());
 	}
 
 	public static boolean isModelCargoPlane(PlaneModel model) {

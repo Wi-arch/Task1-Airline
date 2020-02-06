@@ -29,7 +29,6 @@ public class PassengerPlane extends AbstractPlane {
 		this.passengerCapacity = capacity;
 	}
 
-	@Override
 	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
 		if (fuelConsumption < 0) {
 			throw new InvalidPlaneValueException("Fuel consumption cannot be negativ");
@@ -37,7 +36,6 @@ public class PassengerPlane extends AbstractPlane {
 		this.fuelConsumption = fuelConsumption;
 	}
 
-	@Override
 	public void setModel(PlaneModel model) throws InvalidPlaneValueException {
 		if (!PassengerPlaneValidator.isModelPassengerPlane(model)) {
 			throw new InvalidPlaneValueException("Invalid passenger plane model");

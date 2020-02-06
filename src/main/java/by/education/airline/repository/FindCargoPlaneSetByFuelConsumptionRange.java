@@ -7,12 +7,12 @@ import java.util.Set;
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.specification.Specification;
 
-public class FindCargoPlaneByFuelConsumptionRange implements Specification<CargoPlane> {
+public class FindCargoPlaneSetByFuelConsumptionRange implements Specification<CargoPlane> {
 
 	private double minFuelConsumption;
 	private double maxFuelConsumption;
 
-	public FindCargoPlaneByFuelConsumptionRange(double minFuelConsumption, double maxFuelConsumption) {
+	public FindCargoPlaneSetByFuelConsumptionRange(double minFuelConsumption, double maxFuelConsumption) {
 		this.minFuelConsumption = minFuelConsumption;
 		this.maxFuelConsumption = maxFuelConsumption;
 	}

@@ -7,11 +7,11 @@ import java.util.Set;
 import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.specification.Specification;
 
-public class FindPassengerPlaneByCapacity implements Specification<PassengerPlane> {
+public class FindPassengerPlaneSetByCapacity implements Specification<PassengerPlane> {
 
 	private int capacity;
 
-	public FindPassengerPlaneByCapacity(int capacity) {
+	public FindPassengerPlaneSetByCapacity(int capacity) {
 		this.capacity = capacity;
 	}
 

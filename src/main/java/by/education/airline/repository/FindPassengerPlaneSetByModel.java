@@ -8,11 +8,11 @@ import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.entity.plane.PassengerPlaneModel;
 import by.education.airline.specification.Specification;
 
-public class FindPassengerPlaneByModel implements Specification<PassengerPlane> {
+public class FindPassengerPlaneSetByModel implements Specification<PassengerPlane> {
 
 	private PassengerPlaneModel model;
 
-	public FindPassengerPlaneByModel(PassengerPlaneModel model) {
+	public FindPassengerPlaneSetByModel(PassengerPlaneModel model) {
 		this.model = model;
 	}
 

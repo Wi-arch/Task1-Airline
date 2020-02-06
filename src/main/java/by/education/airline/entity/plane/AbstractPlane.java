@@ -9,6 +9,7 @@ public abstract class AbstractPlane {
 	protected double fuelConsumption;
 	protected PlaneModel model;
 	protected Optional<String> airlineName;
+	protected int id;
 
 	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
 		this.fuelConsumption = fuelConsumption;
@@ -32,6 +33,10 @@ public abstract class AbstractPlane {
 
 	public void setAirlineName(Optional<String> airline) {
 		this.airlineName = airline;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }
