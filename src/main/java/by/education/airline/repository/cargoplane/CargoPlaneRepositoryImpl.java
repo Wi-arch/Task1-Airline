@@ -22,7 +22,7 @@ public enum CargoPlaneRepositoryImpl implements Repository<CargoPlane> {
 	INSTANCE;
 
 	private final Logger LOGGER = Logger.getLogger(CargoPlaneRepositoryImpl.class);
-	private String path = "src/main/resources/CargoPlanes.txt";
+	private String path = "CargoPlanes.txt";
 	List<Optional<CargoPlane>> cargoPlaneList = new ArrayList<>();
 
 	private CargoPlaneRepositoryImpl() {

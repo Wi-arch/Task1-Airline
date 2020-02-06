@@ -18,7 +18,7 @@ public enum AirlineRepositoryImpl implements Repository<Airline> {
 	INSTANCE;
 
 	private final Logger LOGGER = Logger.getLogger(AirlineRepositoryImpl.class);
-	private String path = "src/main/resources/Airlines.txt";
+	private String path = "Airlines.txt";
 	List<Airline> airlineList = new ArrayList<>();
 
 	private AirlineRepositoryImpl() {

@@ -26,7 +26,7 @@ public class Reader {
 
 		StringBuilder result = new StringBuilder();
 
-		File file = new File(path);
+		File file = new File(getClass().getClassLoader().getResource(path).getPath());
 		if (!file.exists()) {
 			LOGGER.fatal("File to initialize application not found " + path);
 			throw new RuntimeException("File " + path + " not found");

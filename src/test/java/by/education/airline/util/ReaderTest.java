@@ -6,10 +6,10 @@ import org.junit.Test;
 
 public class ReaderTest {
 
-	private final static String PATH = "src/test/resources/PassengerPlanes.txt";
+	private final static String PATH = "PassengerPlanes.txt";
 	private final static String EXPECTED = "FuelConsumption=180.9 PlaneModel=AIRBUS330 PassengerCapacity=500 AirlineName=Air Costa\r\n"
 			+ "FuelConsumption=185.0 PlaneModel=AIRBUS330 PassengerCapacity=550 AirlineName=GoAir\r\n";
-	private final static String WRONG_PATH = "src/tytyty/tatata.txt";
+	private final static String WRONG_PATH = "tratata.txt";
 
 	@Test
 	public void testReadStringFromFilePositive() {
