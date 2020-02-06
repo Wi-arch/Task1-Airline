@@ -4,16 +4,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.entity.airline.Airline;
 
 public class AirlineParser {
 
 	private final static String AIRLINE_NAME_REGEX = "AirlineName=";
+	private static final Logger LOGGER = Logger.getLogger(AirlineParser.class);
 
 	public static List<Airline> parseStringToAirlineList(String source) {
 
 		if (source == null) {
-			// TODO write log
+			LOGGER.info("Null source string to parse");
 			return new LinkedList<Airline>();
 		}
 		List<Airline> result = new LinkedList<>();

@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
 public class Reader {
+
+	private final static Logger LOGGER = Logger.getLogger(Reader.class);
 
 	private Reader() {
 	}
@@ -24,7 +28,7 @@ public class Reader {
 
 		File file = new File(path);
 		if (!file.exists()) {
-			// TODO write log
+			LOGGER.fatal("File to initialize application not found " + path);
 			throw new RuntimeException("File " + path + " not found");
 		}
 
@@ -37,7 +41,7 @@ public class Reader {
 			}
 
 		} catch (IOException e) {
-			// TODO write log
+			LOGGER.warn(e);
 		}
 		return result.toString();
 	}

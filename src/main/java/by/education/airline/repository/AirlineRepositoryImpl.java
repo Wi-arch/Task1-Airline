@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.exception.RepositoryException;
 import by.education.airline.specification.Specification;
@@ -14,11 +16,13 @@ public enum AirlineRepositoryImpl implements Repository<Airline> {
 
 	INSTANCE;
 
+	private final Logger LOGGER = Logger.getLogger(AirlineRepositoryImpl.class);
 	private String path = "src/main/resources/Airlines.txt";
 	List<Airline> airlineList = new ArrayList<>();
 
 	private AirlineRepositoryImpl() {
 		initAirlineRepository();
+		LOGGER.info("Airline repository initialized successfully");
 	}
 
 	public String getPath() {
@@ -32,6 +36,7 @@ public enum AirlineRepositoryImpl implements Repository<Airline> {
 	@Override
 	public Set<Airline> execute(Specification<Airline> specification) throws RepositoryException {
 		if (specification == null) {
+			LOGGER.warn("Null specification");
 			throw new RepositoryException("Null criterion");
 		}
 		return specification.execute();

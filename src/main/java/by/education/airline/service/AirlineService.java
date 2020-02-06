@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.entity.plane.AbstractPlane;
 import by.education.airline.entity.plane.CargoPlane;
@@ -23,6 +25,7 @@ import by.education.airline.validator.PassengerPlaneValidator;
 
 public class AirlineService {
 
+	private static final Logger LOGGER = Logger.getLogger(AirlineService.class);
 	private final Repository<Airline> repository;
 	private Specification<Airline> specification;
 	private Set<Airline> airlineSet;
@@ -42,6 +45,7 @@ public class AirlineService {
 	public double getTotalCarryingCapacity(Airline airline) throws ServiceException {
 
 		if (airline == null) {
+			LOGGER.warn("Null input airline");
 			throw new ServiceException("Null airline");
 		}
 		double totalCapacity = 0;
@@ -57,6 +61,7 @@ public class AirlineService {
 	public int getTotalPassengersCapacity(Airline airline) throws ServiceException {
 
 		if (airline == null) {
+			LOGGER.warn("Null input airline");
 			throw new ServiceException("Null airline");
 		}
 		int totalCapacity = 0;
@@ -84,6 +89,7 @@ public class AirlineService {
 	public void addAirline(Airline airline) throws ServiceException {
 
 		if (airline == null) {
+			LOGGER.warn("Null input airline");
 			throw new ServiceException("Null airline");
 		}
 		specification = new AddAirline(airline);
@@ -108,6 +114,7 @@ public class AirlineService {
 	public Set<Airline> getAirlineByName(String airlineName) throws ServiceException {
 
 		if (airlineName == null) {
+			LOGGER.warn("Null input airline");
 			throw new ServiceException("Null airline name");
 		}
 		specification = new FindAirlineByName(airlineName);
@@ -123,6 +130,7 @@ public class AirlineService {
 			throws ServiceException {
 
 		if (airlineName == null || comparator == null) {
+			LOGGER.warn("Null input airline or comarator");
 			throw new ServiceException("Null airline");
 		}
 		specification = new SortPlaneSetInAirline(airlineName, comparator);

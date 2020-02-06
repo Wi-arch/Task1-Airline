@@ -2,6 +2,8 @@ package by.education.airline.service;
 
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.entity.plane.PassengerPlaneModel;
 import by.education.airline.exception.RepositoryException;
@@ -16,6 +18,7 @@ import by.education.airline.specification.Specification;
 
 public class PassengerPlaneService {
 
+	private final static Logger LOGGER = Logger.getLogger(PassengerPlaneService.class);
 	private final Repository<PassengerPlane> repository;
 	private Specification<PassengerPlane> specification;
 	private Set<PassengerPlane> passengerPlaneSet;
@@ -71,6 +74,7 @@ public class PassengerPlaneService {
 	public void addPassengerPlane(PassengerPlane plane) throws ServiceException {
 
 		if (plane == null) {
+			LOGGER.warn("Null passenger plane");
 			throw new ServiceException("Null passenger plane");
 		}
 		specification = new AddPassengerPlane(plane);

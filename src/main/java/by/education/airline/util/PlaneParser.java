@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.entity.plane.CargoPlaneModel;
 import by.education.airline.entity.plane.PassengerPlane;
@@ -13,6 +15,7 @@ import by.education.airline.exception.InvalidPlaneValueException;
 
 public class PlaneParser {
 
+	private final static Logger LOGGER = Logger.getLogger(PlaneParser.class);
 	private final static String CARGO_PLANE_REGEX = "FuelConsumption=\\d+[.]\\d{0,}\\s+PlaneModel=\\w+\\s+"
 			+ "CarryingCapacity=\\d+[.]\\d{0,}\\s+AirlineName=.*";
 	private final static String PASSENGER_PLANE_REGEX = "FuelConsumption=\\d+[.]\\d{0,}\\s+PlaneModel=\\w+\\s+"
@@ -44,7 +47,7 @@ public class PlaneParser {
 					plane.setAirlineName(Optional.ofNullable(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1")));
 					result.add(Optional.ofNullable(plane));
 				} catch (RuntimeException | InvalidPlaneValueException e) {
-					// TODO write log
+					LOGGER.warn("Cannot parse invalid value ", e);
 				}
 			}
 		}
@@ -72,7 +75,7 @@ public class PlaneParser {
 
 					result.add(Optional.ofNullable(plane));
 				} catch (RuntimeException | InvalidPlaneValueException e) {
-					// TODO write log
+					LOGGER.warn("Cannot parse invalid value ", e);
 				}
 			}
 		}

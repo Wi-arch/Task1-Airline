@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.entity.airline.Airline;
 import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.exception.RepositoryException;
@@ -16,11 +18,13 @@ public enum CargoPlaneRepositoryImpl implements Repository<CargoPlane> {
 
 	INSTANCE;
 
+	private final Logger LOGGER = Logger.getLogger(CargoPlaneRepositoryImpl.class);
 	private String path = "src/main/resources/CargoPlanes.txt";
 	List<Optional<CargoPlane>> cargoPlaneList = new ArrayList<>();
 
 	private CargoPlaneRepositoryImpl() {
 		initCargoPlaneRepository();
+		LOGGER.info("Cargo plane repository initialized successfully");
 	}
 
 	public String getPath() {
@@ -34,6 +38,7 @@ public enum CargoPlaneRepositoryImpl implements Repository<CargoPlane> {
 	@Override
 	public Set<CargoPlane> execute(Specification<CargoPlane> specification) throws RepositoryException {
 		if (specification == null) {
+			LOGGER.warn("Null specification");
 			throw new RepositoryException("Null criterion");
 		}
 
@@ -53,7 +58,7 @@ public enum CargoPlaneRepositoryImpl implements Repository<CargoPlane> {
 					airline.iterator().next().addPlane(plane.get());
 				}
 			} catch (RepositoryException e) {
-				// TODO write log
+				LOGGER.warn(e);
 			}
 		}
 	}

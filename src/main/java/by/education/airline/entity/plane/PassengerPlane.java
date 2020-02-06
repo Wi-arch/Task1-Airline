@@ -1,11 +1,14 @@
 package by.education.airline.entity.plane;
 
+import org.apache.log4j.Logger;
+
 import by.education.airline.exception.InvalidPlaneValueException;
 import by.education.airline.validator.PassengerPlaneValidator;
 
 public class PassengerPlane extends AbstractPlane {
 
 	private static int idCounter;
+	private static final Logger LOGGER = Logger.getLogger(PassengerPlane.class);
 
 	private int passengerCapacity;
 	private int id;
@@ -24,6 +27,7 @@ public class PassengerPlane extends AbstractPlane {
 
 	public void setCapacity(int capacity) throws InvalidPlaneValueException {
 		if (capacity <= 0) {
+			LOGGER.warn("Invalid passenger capacity");
 			throw new InvalidPlaneValueException("Invalid passenger capacity");
 		}
 		this.passengerCapacity = capacity;
@@ -31,6 +35,7 @@ public class PassengerPlane extends AbstractPlane {
 
 	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
 		if (fuelConsumption < 0) {
+			LOGGER.warn("Invalid fuel consumption");
 			throw new InvalidPlaneValueException("Fuel consumption cannot be negativ");
 		}
 		this.fuelConsumption = fuelConsumption;
@@ -38,6 +43,7 @@ public class PassengerPlane extends AbstractPlane {
 
 	public void setModel(PlaneModel model) throws InvalidPlaneValueException {
 		if (!PassengerPlaneValidator.isModelPassengerPlane(model)) {
+			LOGGER.warn("Invalid model type");
 			throw new InvalidPlaneValueException("Invalid passenger plane model");
 		}
 		this.model = model;
