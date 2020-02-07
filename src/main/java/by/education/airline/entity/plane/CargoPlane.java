@@ -1,54 +1,21 @@
 package by.education.airline.entity.plane;
 
-import org.apache.log4j.Logger;
-
-import by.education.airline.exception.InvalidPlaneValueException;
-import by.education.airline.validator.CargoPlaneValidator;
-
 public class CargoPlane extends AbstractPlane {
 
 	private static int idCounter;
-	private static final Logger LOGGER = Logger.getLogger(CargoPlane.class);
 
 	private double carryingCapacity;
-	private int id;
 
 	public CargoPlane() {
 		this.id = ++idCounter;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public double getCarryingCapacity() {
 		return carryingCapacity;
 	}
 
-	public void setCarryingCapacity(double carryingCapacity) throws InvalidPlaneValueException {
-		if (carryingCapacity <= 0) {
-			LOGGER.warn("Invalid  carrying capacity");
-			throw new InvalidPlaneValueException("Invalid carrying capacity");
-		}
+	public void setCarryingCapacity(double carryingCapacity) {
 		this.carryingCapacity = carryingCapacity;
-	}
-
-	@Override
-	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
-		if (fuelConsumption < 0) {
-			LOGGER.warn("Invalid  fuel consumption");
-			throw new InvalidPlaneValueException("Fuel consumption cannot be negativ");
-		}
-		this.fuelConsumption = fuelConsumption;
-	}
-
-	@Override
-	public void setModel(PlaneModel model) throws InvalidPlaneValueException {
-		if (!CargoPlaneValidator.isModelCargoPlane(model)) {
-			LOGGER.warn("Invalid  model type");
-			throw new InvalidPlaneValueException("Invalid cargo plane model");
-		}
-		this.model = model;
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class PlaneParserTest {
 	public void init() throws Exception {
 
 		PassengerPlane plane = new PassengerPlane();
-		plane.setAirlineName(Optional.ofNullable("GoAir"));
+		plane.setAirlineName("GoAir");
 		plane.setCapacity(500);
 		plane.setFuelConsumption(180.7);
 		plane.setModel(PassengerPlaneModel.AIRBUS310);
@@ -38,7 +38,7 @@ public class PlaneParserTest {
 		setSameIDToPassengerPlane(expectedPassengerPlane);
 
 		CargoPlane cargoPlane = new CargoPlane();
-		cargoPlane.setAirlineName(Optional.ofNullable("Air Costa"));
+		cargoPlane.setAirlineName("Air Costa");
 		cargoPlane.setCarryingCapacity(1960);
 		cargoPlane.setFuelConsumption(188);
 		cargoPlane.setModel(CargoPlaneModel.BOEING747);

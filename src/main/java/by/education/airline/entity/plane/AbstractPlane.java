@@ -2,20 +2,18 @@ package by.education.airline.entity.plane;
 
 import java.util.Optional;
 
-import by.education.airline.exception.InvalidPlaneValueException;
-
 public abstract class AbstractPlane {
 
 	protected double fuelConsumption;
 	protected PlaneModel model;
-	protected Optional<String> airlineName;
+	protected String airlineName;
 	protected int id;
 
-	public void setFuelConsumption(double fuelConsumption) throws InvalidPlaneValueException {
+	public void setFuelConsumption(double fuelConsumption) {
 		this.fuelConsumption = fuelConsumption;
 	}
 
-	public void setModel(PlaneModel model) throws InvalidPlaneValueException {
+	public void setModel(PlaneModel model) {
 		this.model = model;
 	}
 
@@ -28,15 +26,19 @@ public abstract class AbstractPlane {
 	}
 
 	public Optional<String> getAirlineName() {
-		return airlineName;
+		return Optional.ofNullable(airlineName);
 	}
 
-	public void setAirlineName(Optional<String> airline) {
+	public void setAirlineName(String airline) {
 		this.airlineName = airline;
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

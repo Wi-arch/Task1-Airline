@@ -10,6 +10,7 @@ public enum PassengerPlaneModel implements PlaneModel {
 
 	private String model;
 
+	@Override
 	public String getModel() {
 		return model;
 	}

@@ -11,7 +11,6 @@ import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.entity.plane.CargoPlaneModel;
 import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.entity.plane.PassengerPlaneModel;
-import by.education.airline.exception.InvalidPlaneValueException;
 
 public class PlaneParser {
 
@@ -44,9 +43,9 @@ public class PlaneParser {
 					plane.setModel(model);
 					int capacity = Integer.valueOf(planeString.replaceAll(PASSENGER_CAPACITY_REGEX, "$1"));
 					plane.setCapacity(capacity);
-					plane.setAirlineName(Optional.ofNullable(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1")));
+					plane.setAirlineName(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1"));
 					result.add(Optional.ofNullable(plane));
-				} catch (RuntimeException | InvalidPlaneValueException e) {
+				} catch (RuntimeException e) {
 					LOGGER.warn("Cannot parse invalid value ", e);
 				}
 			}
@@ -71,10 +70,10 @@ public class PlaneParser {
 					plane.setModel(model);
 					double carryingCapacity = Double.valueOf(planeString.replaceAll(CARRYING_CAPACITY_REGEX, "$1"));
 					plane.setCarryingCapacity(carryingCapacity);
-					plane.setAirlineName(Optional.ofNullable(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1")));
+					plane.setAirlineName(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1"));
 
 					result.add(Optional.ofNullable(plane));
-				} catch (RuntimeException | InvalidPlaneValueException e) {
+				} catch (RuntimeException e) {
 					LOGGER.warn("Cannot parse invalid value ", e);
 				}
 			}

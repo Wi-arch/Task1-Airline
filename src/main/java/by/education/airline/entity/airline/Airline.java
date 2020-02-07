@@ -8,25 +8,24 @@ import by.education.airline.entity.plane.AbstractPlane;
 
 public class Airline {
 
-	private Optional<String> name;
+	private String name;
 	private List<AbstractPlane> planeList;
 
 	public Airline() {
-		this.name = Optional.empty();
 		this.planeList = new LinkedList<>();
 	}
 
 	public Airline(String name) {
-		this.name = Optional.ofNullable(name);
+		this.name = name;
 		this.planeList = new LinkedList<>();
 	}
 
 	public Optional<String> getName() {
-		return name;
+		return Optional.ofNullable(name);
 	}
 
 	public void setName(String name) {
-		this.name = Optional.ofNullable(name);
+		this.name = name;
 	}
 
 	public boolean addPlane(AbstractPlane plane) {
