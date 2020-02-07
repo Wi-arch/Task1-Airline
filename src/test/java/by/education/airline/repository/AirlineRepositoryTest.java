@@ -17,7 +17,6 @@ public class AirlineRepositoryTest {
 
 	@Test
 	public void testFindAirlineByNamePositive() throws RepositoryException {
-
 		Airline actual = repository.execute(new FindAirlineByName("GoAir")).iterator().next();
 		Airline expected = new Airline("GoAir");
 		assertEquals(expected, actual);
@@ -25,23 +24,36 @@ public class AirlineRepositoryTest {
 
 	@Test
 	public void testFindAirlineByNameNegative() throws RepositoryException {
-
 		Airline actual = repository.execute(new FindAirlineByName("GoAir")).iterator().next();
+		Airline expected = new Airline("GoAirToToTo");
+		assertNotEquals(expected, actual);
+	}
+
+	@Test(expected = RepositoryException.class)
+	public void testFindAirlineByNameNegativeWithException() throws RepositoryException {
+		Airline actual = repository.execute(null).iterator().next();
 		Airline expected = new Airline("GoAirToToTo");
 		assertNotEquals(expected, actual);
 	}
 
 	@Test
 	public void testGetAirlineSetNegative() throws RepositoryException {
-
 		int actual = repository.execute(new GetAirlineSet()).size();
-		assertNotEquals(5, actual);
+		int expected = 5;
+		assertNotEquals(expected, actual);
 	}
 
 	@Test
 	public void testGetAirlineSetPositive() throws RepositoryException {
-
 		int actual = repository.execute(new GetAirlineSet()).size();
-		assertEquals(2, actual);
+		int expected = 2;
+		assertEquals(expected, actual);
+	}
+
+	@Test(expected = RepositoryException.class)
+	public void testGetAirlineSetNegativeWithException() throws RepositoryException {
+		int actual = repository.execute(null).size();
+		int expected = 2;
+		assertEquals(expected, actual);
 	}
 }

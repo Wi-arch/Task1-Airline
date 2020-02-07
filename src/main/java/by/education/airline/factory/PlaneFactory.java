@@ -33,9 +33,11 @@ public enum PlaneFactory {
 		AbstractPlane abstractPlane = null;
 		if (planeModel instanceof PassengerPlaneModel) {
 			abstractPlane = new PassengerPlane();
+			abstractPlane.setModel(planeModel);
 		}
 		if (planeModel instanceof CargoPlaneModel) {
 			abstractPlane = new CargoPlane();
+			abstractPlane.setModel(planeModel);
 		}
 		abstractPlane.setFuelConsumption(fuelConsumption);
 		abstractPlane.setAirlineName(airlineName);

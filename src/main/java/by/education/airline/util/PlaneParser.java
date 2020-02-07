@@ -11,6 +11,8 @@ import by.education.airline.entity.plane.CargoPlane;
 import by.education.airline.entity.plane.CargoPlaneModel;
 import by.education.airline.entity.plane.PassengerPlane;
 import by.education.airline.entity.plane.PassengerPlaneModel;
+import by.education.airline.exception.InvalidPlaneValueException;
+import by.education.airline.factory.PlaneFactory;
 
 public class PlaneParser {
 
@@ -30,22 +32,21 @@ public class PlaneParser {
 
 		List<Optional<PassengerPlane>> result = new LinkedList<>();
 		scanner = new Scanner(source);
-
+		String planeString = null;
+		PassengerPlane plane = null;
 		while (scanner.hasNextLine()) {
-			String planeString = scanner.nextLine();
+			planeString = scanner.nextLine();
 			if (planeString.matches(PASSENGER_PLANE_REGEX)) {
 				try {
-					PassengerPlane plane = new PassengerPlane();
 					double fuelConsumption = Double.valueOf(planeString.replaceAll(FUEL_CONSUMPTION_REGEX, "$1"));
-					plane.setFuelConsumption(fuelConsumption);
 					PassengerPlaneModel model = PassengerPlaneModel
 							.valueOf(planeString.replaceAll(PLANE_MODEL_REGEX, "$1").toUpperCase());
-					plane.setModel(model);
 					int capacity = Integer.valueOf(planeString.replaceAll(PASSENGER_CAPACITY_REGEX, "$1"));
+					String airline = planeString.replaceAll(AIRLINE_NAME_REGEX, "$1");
+					plane = (PassengerPlane) PlaneFactory.INSTANCE.createPlane(model, fuelConsumption, airline);
 					plane.setCapacity(capacity);
-					plane.setAirlineName(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1"));
 					result.add(Optional.ofNullable(plane));
-				} catch (RuntimeException e) {
+				} catch (RuntimeException | InvalidPlaneValueException e) {
 					LOGGER.warn("Cannot parse invalid value ", e);
 				}
 			}
@@ -57,23 +58,21 @@ public class PlaneParser {
 
 		List<Optional<CargoPlane>> result = new LinkedList<>();
 		scanner = new Scanner(source);
-
+		String planeString = null;
+		CargoPlane cargoPlane = null;
 		while (scanner.hasNextLine()) {
-			String planeString = scanner.nextLine();
+			planeString = scanner.nextLine();
 			if (planeString.matches(CARGO_PLANE_REGEX)) {
 				try {
-					CargoPlane plane = new CargoPlane();
 					double fuelConsumption = Double.valueOf(planeString.replaceAll(FUEL_CONSUMPTION_REGEX, "$1"));
-					plane.setFuelConsumption(fuelConsumption);
 					CargoPlaneModel model = CargoPlaneModel
 							.valueOf(planeString.replaceAll(PLANE_MODEL_REGEX, "$1").toUpperCase());
-					plane.setModel(model);
 					double carryingCapacity = Double.valueOf(planeString.replaceAll(CARRYING_CAPACITY_REGEX, "$1"));
-					plane.setCarryingCapacity(carryingCapacity);
-					plane.setAirlineName(planeString.replaceAll(AIRLINE_NAME_REGEX, "$1"));
-
-					result.add(Optional.ofNullable(plane));
-				} catch (RuntimeException e) {
+					String airline = planeString.replaceAll(AIRLINE_NAME_REGEX, "$1");
+					cargoPlane = (CargoPlane) PlaneFactory.INSTANCE.createPlane(model, fuelConsumption, airline);
+					cargoPlane.setCarryingCapacity(carryingCapacity);
+					result.add(Optional.ofNullable(cargoPlane));
+				} catch (RuntimeException | InvalidPlaneValueException e) {
 					LOGGER.warn("Cannot parse invalid value ", e);
 				}
 			}

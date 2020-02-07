@@ -2,7 +2,6 @@ package by.education.airline.util;
 
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -27,23 +26,23 @@ public class PlaneParserTest {
 	private List<Optional<CargoPlane>> actualCargoPlane = new LinkedList<>();
 
 	@Before
-	public void init() throws Exception {
+	public void init() {
 
 		PassengerPlane plane = new PassengerPlane();
 		plane.setAirlineName("GoAir");
 		plane.setCapacity(500);
 		plane.setFuelConsumption(180.7);
 		plane.setModel(PassengerPlaneModel.AIRBUS310);
+		plane.setId(1);
 		expectedPassengerPlane.add(Optional.ofNullable(plane));
-		setSameIDToPassengerPlane(expectedPassengerPlane);
 
 		CargoPlane cargoPlane = new CargoPlane();
 		cargoPlane.setAirlineName("Air Costa");
 		cargoPlane.setCarryingCapacity(1960);
 		cargoPlane.setFuelConsumption(188);
 		cargoPlane.setModel(CargoPlaneModel.BOEING747);
+		cargoPlane.setId(1);
 		expectedCargoPlane.add(Optional.ofNullable(cargoPlane));
-		setSameIDToCargoPlane(expectedCargoPlane);
 
 	}
 
@@ -54,53 +53,26 @@ public class PlaneParserTest {
 	}
 
 	@Test
-	public void testParseStringToPassengerPlaneListPositive() throws Exception {
+	public void testParseStringToPassengerPlaneListPositive() {
 
 		actualPassengerPlane = PlaneParser.parseStringToPassengerPlaneList(PASSENGER_PLANE_STRING);
-		setSameIDToPassengerPlane(actualPassengerPlane);
+		actualPassengerPlane.get(0).get().setId(1);
 		assertTrue(actualPassengerPlane.equals(expectedPassengerPlane));
 	}
 
 	@Test
-	public void testParseStringToCargoPlaneListNegative() throws Exception {
+	public void testParseStringToCargoPlaneListNegative() {
 
 		actualCargoPlane = PlaneParser.parseStringToCargoPlaneList(CARGO_PLANE_STRING);
-
 		assertTrue(!actualCargoPlane.equals(expectedCargoPlane));
 	}
 
 	@Test
-	public void testParseStringToCargoPlaneListPositive() throws Exception {
+	public void testParseStringToCargoPlaneListPositive() {
 
 		actualCargoPlane = PlaneParser.parseStringToCargoPlaneList(CARGO_PLANE_STRING);
-		setSameIDToCargoPlane(actualCargoPlane);
+		actualCargoPlane.get(0).get().setId(1);
 		assertTrue(actualCargoPlane.equals(expectedCargoPlane));
-	}
-
-	private void setSameIDToPassengerPlane(List<Optional<PassengerPlane>> target) throws Exception {
-
-		PassengerPlane tempPlane = null;
-		Field idField = null;
-		for (Optional<PassengerPlane> plane : target) {
-			tempPlane = plane.get();
-			idField = tempPlane.getClass().getDeclaredField("id");
-			idField.setAccessible(true);
-			idField.setInt(tempPlane, 1);
-			idField.setAccessible(false);
-		}
-	}
-
-	private void setSameIDToCargoPlane(List<Optional<CargoPlane>> target) throws Exception {
-
-		CargoPlane tempPlane = null;
-		Field idField = null;
-		for (Optional<CargoPlane> plane : target) {
-			tempPlane = plane.get();
-			idField = tempPlane.getClass().getDeclaredField("id");
-			idField.setAccessible(true);
-			idField.setInt(tempPlane, 1);
-			idField.setAccessible(false);
-		}
 	}
 
 }
