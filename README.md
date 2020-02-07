@@ -1,6 +1,3 @@
-Авиакомпания. Определить иерархию самолетов. Создать авиакомпанию. Посчитать общую вместимость и грузоподъемность. 
-Провести сортировку самолетов компании на основе одного и нескольких параметров. Найти самолет в компании, соответствующий
-заданному диапазону параметров потребления горючего.
+Task "Airline". Define the hierarchy of aircraft. Create an airline. Calculate total capacity and load capacity. Sort company aircraft based on one or several parameters. Find a plane in a company that matches a given range of fuel consumption parameters.
 
-Все спецификации находятся в пакете репозиторий, модификаторы доступа коллекциям установлены default/friendly с целью получения
-доступа имплементациям спецификации к ним.
+All specifications are in the repository package, access modifiers for collections are installed by default / friendly in order to gain access to the implementation of the specification to them.
